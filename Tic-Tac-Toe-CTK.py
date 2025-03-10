@@ -44,10 +44,15 @@ class TTT(CTK.CTk):
             for column in range(3):
                 btn = CTK.CTkButton(frame, width=118, height=30, font=font, text=" ", command=lambda: self.Select(row, column), border_width=8, border_color="grey87")
                 btn.pack(side="left", padx=18, pady=8)
-                self.display_grid[row][column] = btn
+                self.display_grid[row][column] = self.Return_Box(btn)
+                print(type(btn), self.display_grid[row][column])
         for b in self.display_grid:
             for box in b:
                 box.configure(state="normal", text=" ")
+
+    def Return_Box(self, m):
+        return m
+    
 
     def Unpack_Children(self, parent):
         for widget in parent.winfo_children():
