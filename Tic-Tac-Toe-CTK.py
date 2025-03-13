@@ -17,7 +17,7 @@ class TTT(CTK.CTk):
         #self.hotbar = CTK.CTkFrame(self.top_frame, fg_color="transparent", corner_radius=0, border_width=0)
         #self.hotbar.pack(side="top", fill="x")
         self.p1_score = self.p2_score = 0
-        self.display_grid = [[None for x in range(3)] for x in range(3)]
+        self.display_dict = {}
         self.grid = [[8 for x in range(3)] for x in range(3)]
         self.current_p = 0
         self.Map_Scoreboard()
@@ -44,11 +44,10 @@ class TTT(CTK.CTk):
             for column in range(3):
                 btn = CTK.CTkButton(frame, width=118, height=30, font=font, text=" ", command=lambda: self.Select(row, column), border_width=8, border_color="grey87")
                 btn.pack(side="left", padx=18, pady=8)
-                self.display_grid[row][column] = self.Return_Box(btn)
-                print(type(btn), self.display_grid[row][column])
-        for b in self.display_grid:
-            for box in b:
-                box.configure(state="normal", text=" ")
+                self.display_dict[row,column] = self.Return_Box(btn)
+                print(type(btn), self.display_dict[row,column])
+        for b in self.display_dict.values():
+            b.configure(state="normal", text=" ")
 
     def Return_Box(self, m):
         return m
@@ -67,9 +66,9 @@ class TTT(CTK.CTk):
     
     def Change_Box(self, row, col):
         if self.current_p == 0:
-            self.display_grid[row][col].configure(text="O")
+            self.display_dict[row,col].configure(text="O")
         else:
-            self.display_grid[row][col].configure(text="X")
+            self.display_dict[row,col].configure(text="X")
     
     def Winning_Condition(self):
         # Row winning logic
